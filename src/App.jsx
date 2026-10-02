@@ -1,5 +1,7 @@
 import { applications } from './applications';
-
+import Header from './components/Header.jsx';
+import Summary from './components/Summary.jsx';
+import {STATUSES} from './statuses.js';
 /**
  * The starting point. Right now it dumps the raw data on the page so you can
  * see it is loading — replace all of this with your components.
@@ -12,11 +14,16 @@ import { applications } from './applications';
 export default function App() {
 	return (
 		<>
-			<header className="site-header">
-				<div className="container">
-					<h1>Job Application Tracker</h1>
-				</div>
-			</header>
+
+			<Header />
+
+			<Summary 
+			total={applications.length}
+			applied={applications.filter(app => app.status == STATUSES[0]).length}
+			interviewing={applications.filter(app => app.status == STATUSES[1]).length}
+			offer ={applications.filter(app => app.status == STATUSES[2]).length}
+			rejected={applications.filter(app => app.status == STATUSES[3]).length}
+			/>
 
 			<main className="container">
 				<p>{applications.length} applications loaded.</p>
