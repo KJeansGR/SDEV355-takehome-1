@@ -1,30 +1,11 @@
-# Job Application Tracker — Take-Home #1 starter
+# Job Application Tracker — Take-Home #1 
 
-This branch is **a scaffolded project — the data, the stylesheet and an entry point**.
+## Summary
+this assignment was a general introduction into using components and rendering jsx within REACT framework. It heavily focussed on properly using the mapping function within react and component props 
 
-Full instructions and the grading rubric: <https://go.prmf.org/355/takehomes/1>
-
-## Run it
-
-```bash
-npm install
-npm run dev
-```
-
-## What you are given
-
-- `src/applications.js` — the applications, already written
-- `src/statuses.js` — the status names, labels and a date formatter
-- `src/index.css` — every class you need; you should not have to write CSS
-
-## What you add
-
-- Break the page into components, each in its own file
-- Render the list with map() and stable keys
-- Show a status badge, and hide fields that are empty
-- Calculate the summary counts from the data
-
----
-
-Push your work to **your own private repository** and add
-**@joshbarcher** as a collaborator. Do not push to this one.
+## What I acomplished
+- Separateing mapped data between componants and props effectively.
+- effectively transfered data between components without using imported files
+- correctly tracked dynamic count values from a data file
+- adhered to predefined css
+- adhered to good practice of clean code, comments, and regular commits.
