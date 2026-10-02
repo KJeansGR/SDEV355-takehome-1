@@ -1,6 +1,7 @@
 import { applications } from './applications';
 import Header from './components/Header.jsx';
 import Summary from './components/Summary.jsx';
+import AppsContainer from './components/AppsContainer.jsx';
 import {STATUSES} from './statuses.js';
 /**
  * The starting point. Right now it dumps the raw data on the page so you can
@@ -12,22 +13,25 @@ import {STATUSES} from './statuses.js';
  * empty.
  */
 export default function App() {
+
+	//defining an object before passing the props into Summary Componant 
+	const propsForSummary = {
+		total: applications.length,
+		applied: applications.filter(app => app.status == STATUSES[0]).length,
+		interviewing: applications.filter(app => app.status == STATUSES[1]).length,
+		offer: applications.filter(app => app.status == STATUSES[2]).length,
+		rejected: applications.filter(app => app.status == STATUSES[3]).length
+	}
+	
 	return (
 		<>
 
 			<Header />
 
-			<Summary 
-			total={applications.length}
-			applied={applications.filter(app => app.status == STATUSES[0]).length}
-			interviewing={applications.filter(app => app.status == STATUSES[1]).length}
-			offer ={applications.filter(app => app.status == STATUSES[2]).length}
-			rejected={applications.filter(app => app.status == STATUSES[3]).length}
-			/>
+			<Summary {...propsForSummary} />
 
 			<main className="container">
-				<p>{applications.length} applications loaded.</p>
-				<pre>{JSON.stringify(applications[0], null, 2)}</pre>
+				<AppsContainer />
 			</main>
 		</>
 	);

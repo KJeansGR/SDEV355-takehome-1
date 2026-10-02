@@ -172,6 +172,7 @@ a {
 .job-card {
 	display: flex;
 	align-items: flex-start;
+	justify-content:space-between;/*i added this to get the color badges to space properly to the right */
 	gap: 16px;
 	background: var(--panel);
 	border: 1px solid var(--line);
