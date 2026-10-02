@@ -1,15 +1,23 @@
 import { applications } from "../applications";
 import ApplicationCard from "./ApplicationCard";
 
+/*helper function to sort the applications object by the "Newest" */ 
+function byNewest(a, b) {
+  return b.appliedOn.localeCompare(a.appliedOn);
+}
 
+/*
+This function is the outer container element for all of the application cards .
+iThisjsx element maps a sorted version of the applications array into a larger div element.
+*/
 function AppsContainer(){
-
+    const sortedApps = [...applications].sort(byNewest)
     return(
     <>
         <h2>Applications</h2>
 
         <div className="job-list">
-            {applications.map((app) => 
+            {sortedApps.map((app) => 
             {
                 return <ApplicationCard key={app.id} {...app}/>
             })}
@@ -18,17 +26,3 @@ function AppsContainer(){
     )
 }
 export default AppsContainer;
-
-//     <div className="job-card">
-//             <h3>{app.role}</h3>
-//             <div className=" company">
-//                 {app.company}
-//             </div>
-//             <div className="meta">
-//                 {app.appliedOn} | {app.source}
-//             </div>
-//             {app.notes &&
-//             <div className="note">
-//                 {app.notes}
-//             </div>}
-//         </div>

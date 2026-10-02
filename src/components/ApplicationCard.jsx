@@ -1,6 +1,18 @@
-import {STATUSES} from '../statuses.js';
+import Badge from './Badge.jsx';
 
-
+/**
+ * Renders a card containing information about a job application.
+ *
+ * @param {Object} props -          The application data.
+ * @param {string} props.role -     The job title or role applied for.
+ * @param {string} props.company -  The company offering the position.
+ * @param {string} props.appliedOn - The date the application was submitted.
+ * @param {string} props.source -   Where the job posting was found.
+ * @param {string} props.notes -    Additional notes about the application.
+ * @param {string} props.status -   The current status of the application.
+ *
+ * @returns {JSX.Element} A card displaying the application's information.
+ */
 function ApplicationCard({
     role,
     company,
@@ -20,19 +32,16 @@ function ApplicationCard({
                 {company}
             </div>
             <div className="meta">
-                {appliedOn} | {source}
+                {appliedOn} {source && "| " + source}
             </div>
+
             {notes &&
                 <div className="note">
                     {notes}
                 </div>
             }
         </div>
-        <div className={"badge "+"badge-"+ status}>
-        {
-            status
-        }
-        </div>
+        <Badge status ={status} />
     </div>
             
 

@@ -1,5 +1,15 @@
 
-
+/**
+ * Renders a Banner style summary of current application statistics for the user.
+ *
+ * @param {number} props.total - Total number of job applications.
+ * @param {number} props.applied - Number of applications currently in the applied stage.
+ * @param {number} props.interviewing - Number of applications currently in the interviewing stage.
+ * @param {number} props.offer - Number of applications that resulted in an offer.
+ * @param {number} props.rejected - Number of applications that were rejected.
+ *
+ * @returns {JSX.Element} A summary banner displaying application counts by status.
+ */
 function Summary({
     total, 
     applied,
