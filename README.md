@@ -9,3 +9,6 @@ this assignment was a general introduction into using components and rendering j
 - correctly tracked dynamic count values from a data file
 - adhered to predefined css
 - adhered to good practice of clean code, comments, and regular commits.
+
+
+# Job Application Tracker — Take-Home #2
