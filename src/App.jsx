@@ -15,23 +15,33 @@ import { useEffect, useState } from 'react';
  */
 export default function App() {
 	const [applications, setApplications] = useState([]);
-useEffect(() => {
+	const [loading, setLoading] = useState(true);
+	const [error, setError] = useState(false);
+
+	useEffect(() => {
+		const controller = new AbortController();
+
         async function loadApplications() {
             try {
-                const response = await fetch('http://localhost:5173/applications.json');
+                const response = await fetch('http://localhost:5173/applications.json', {signal: controller.signal});
 
                 if (!response.ok) {
                     throw new Error(`HTTP Error: ${response.status}`);
                 }
                 const data = await response.json();
                 setApplications(data);
+
             } catch (error) {
                 console.error("Failed to fetch applications:", error);
-            }
+            } finally{
+				setLoading(false);
+			}
         }
+
 		loadApplications();
-		console.log(applications)
+		return () => controller.abort();
     }, []);
+	
 	//defining an object before passing the props into Summary Componant 
 
 	
@@ -51,7 +61,17 @@ useEffect(() => {
 			<Summary {...propsForSummary} />
 
 			<main className="container">
-				<AppsContainer applications={applications} />
+				<AppsContainer applications={applications} isLoading={loading} isError={error} isEmpty={applications.length <= 0} >
+					{loading && 
+						"Loading"
+					}
+					{error && 
+						"Error"
+					}
+					{(applications.length <= 0 && !loading) && 
+						"Applications are empty"
+					}
+				</AppsContainer>
 			</main>
 		</>
 	);
