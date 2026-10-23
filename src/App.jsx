@@ -17,6 +17,8 @@ export default function App() {
 	const [applications, setApplications] = useState([]);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(false);
+	const [filterSearch, setFilterSearch] = useState("");
+	const [tagFilter, setTagFilter] = useState("all applied interviewing offer rejected");
 
 	useEffect(() => {
 		const controller = new AbortController();
@@ -32,6 +34,11 @@ export default function App() {
                 setApplications(data);
 
             } catch (error) {
+				//prevents abort error from treating ui elements like an actual visual error.
+				if(error.name === "AbortError"){
+					return;
+				}
+				setError(true);
                 console.error("Failed to fetch applications:", error);
             } finally{
 				setLoading(false);
@@ -41,7 +48,7 @@ export default function App() {
 		loadApplications();
 		return () => controller.abort();
     }, []);
-	
+
 	//defining an object before passing the props into Summary Componant 
 
 	
@@ -58,20 +65,41 @@ export default function App() {
 
 			<Header />
 
+			<main className="container">
+
 			<Summary {...propsForSummary} />
 
-			<main className="container">
-				<AppsContainer applications={applications} isLoading={loading} isError={error} isEmpty={applications.length <= 0} >
-					{loading && 
-						"Loading"
-					}
-					{error && 
-						"Error"
-					}
-					{(applications.length <= 0 && !loading) && 
-						"Applications are empty"
-					}
-				</AppsContainer>
+			<div className="filters">
+				<button className= {`chip ${tagFilter.includes("all") ? "active" :""}`}  
+				onClick={()=> setTagFilter("all applied interviewing offer rejected") }>All</button>
+				
+				<button className={`chip ${tagFilter == "applied" ? "active" :""}`}
+				onClick={()=>setTagFilter("applied")}>applied</button>
+				
+				<button className={`chip ${tagFilter == "interviewing" ? "active" :""}`}
+				onClick={()=>setTagFilter("interviewing")}>interviewing</button>
+
+				<button className={`chip ${tagFilter == "offer" ? "active" :""}`}
+				onClick={()=>setTagFilter("offer")}>offer</button>
+
+				<button className={`chip ${tagFilter == "rejected" ? "active" :""}`}
+				onClick={()=>setTagFilter("rejected")}>rejected</button>
+
+				<input type="search" value={filterSearch} onChange={(e) => setFilterSearch(e.target.value)}/>
+			</div>
+
+			<AppsContainer applications={applications} isLoading={loading} isError={error} isEmpty={applications.length <= 0} tagFilter = {tagFilter} searchFilter={filterSearch} >
+				{ (applications.length <= 0 && !error) &&
+					<p className="empty"> Applications are empty</p>
+				}
+				{error &&
+					<p className="error"> Error Loading Applications</p>
+				}
+				{loading &&
+					<p className="loading"> Loading</p>
+				}
+			</AppsContainer>
+
 			</main>
 		</>
 	);

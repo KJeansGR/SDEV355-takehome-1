@@ -12,3 +12,13 @@ this assignment was a general introduction into using components and rendering j
 
 
 # Job Application Tracker — Take-Home #2
+
+## Summary
+This portion of the assignment focused on dealing with state manipulation and filtering state without mutating it. This portion also focused on creating responsive UI with sorted elements 
+
+## What I acomplished
+- fetching information and using cleanup function in a use effect
+- handling different potential states of a array of information that needs to be rendered
+- implementing multiple filtering commands from different sources on a single collection
+- error handling
+- clean UI management  
