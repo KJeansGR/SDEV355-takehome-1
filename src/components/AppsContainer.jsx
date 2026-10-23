@@ -1,4 +1,3 @@
-//import { applications } from "../applications";
 import ApplicationCard from "./ApplicationCard";
 
 /*helper function to sort the applications object by the "Newest" */ 
@@ -13,9 +12,10 @@ iThisjsx element maps a sorted version of the applications array into a larger d
 function AppsContainer({applications, isLoading, isError, isEmpty, tagFilter, searchFilter, children}){
 
 const search = (searchFilter)?.toLowerCase().trim();   
-//const search = (searchFilter ?? "").toLowerCase().trim();
 
-const sortedApps = [...applications].filter(app => !tagFilter?.length || tagFilter.includes(app.status))
+//Filters a non mutated version of applications for a toggled "chip" 
+//and the search value matched against the applications role and company
+const sortedApps = [...applications].filter(app => tagFilter.length === 0 || tagFilter.includes(app.status))
                                     .filter(app => app.company.toLowerCase().includes(search) ||app.role.toLowerCase().includes(search))
                                     .sort(byNewest);
 

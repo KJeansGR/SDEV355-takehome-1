@@ -20,6 +20,7 @@ export default function App() {
 	const [filterSearch, setFilterSearch] = useState("");
 	const [tagFilter, setTagFilter] = useState("all applied interviewing offer rejected");
 
+	//on mount this use effect trys to fewtch applications otherwise returns appropriate erro
 	useEffect(() => {
 		const controller = new AbortController();
 
@@ -50,8 +51,6 @@ export default function App() {
     }, []);
 
 	//defining an object before passing the props into Summary Componant 
-
-	
 	const propsForSummary = {
 		total: applications.length,
 		applied: applications.filter(app => app.status == STATUSES[0]).length,
@@ -68,7 +67,7 @@ export default function App() {
 			<main className="container">
 
 			<Summary {...propsForSummary} />
-
+			
 			<div className="filters">
 				<button className= {`chip ${tagFilter.includes("all") ? "active" :""}`}  
 				onClick={()=> setTagFilter("all applied interviewing offer rejected") }>All</button>
@@ -88,16 +87,23 @@ export default function App() {
 				<input type="search" value={filterSearch} onChange={(e) => setFilterSearch(e.target.value)}/>
 			</div>
 
-			<AppsContainer applications={applications} isLoading={loading} isError={error} isEmpty={applications.length <= 0} tagFilter = {tagFilter} searchFilter={filterSearch} >
-				{ (applications.length <= 0 && !error) &&
-					<p className="empty"> Applications are empty</p>
-				}
-				{error &&
-					<p className="error"> Error Loading Applications</p>
-				}
-				{loading &&
-					<p className="loading"> Loading</p>
-				}
+			<AppsContainer 
+				applications={applications} 
+				isLoading={loading} 
+				isError={error} 
+				isEmpty={applications.length <= 0} 
+				tagFilter = {tagFilter} 
+				searchFilter={filterSearch} 
+				>
+					{ (applications.length <= 0 && !error) &&
+						<p className="empty"> Applications are empty</p>
+					}
+					{error &&
+						<p className="error"> Error Loading Applications</p>
+					}
+					{loading &&
+						<p className="loading"> Loading</p>
+					}
 			</AppsContainer>
 
 			</main>

@@ -21,4 +21,4 @@ This portion of the assignment focused on dealing with state manipulation and fi
 - handling different potential states of a array of information that needs to be rendered
 - implementing multiple filtering commands from different sources on a single collection
 - error handling
-- clean UI management  
+- clean and organized UI management
