@@ -22,3 +22,5 @@ This portion of the assignment focused on dealing with state manipulation and fi
 - implementing multiple filtering commands from different sources on a single collection
 - error handling
 - clean and organized UI management
+
+# Job Application Tracker — Take-Home #3

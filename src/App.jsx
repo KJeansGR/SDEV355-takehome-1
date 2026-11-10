@@ -3,7 +3,8 @@ import Header from './components/Header.jsx';
 import Summary from './components/Summary.jsx';
 import AppsContainer from './components/AppsContainer.jsx';
 import {STATUSES} from './statuses.js';
-import { useEffect, useState } from 'react';
+import { useApplications } from "./hooks/hooks.js";
+import { useState } from 'react';
 /**
  * The starting point. Right now it dumps the raw data on the page so you can
  * see it is loading — replace all of this with your components.
@@ -14,41 +15,11 @@ import { useEffect, useState } from 'react';
  * empty.
  */
 export default function App() {
-	const [applications, setApplications] = useState([]);
-	const [loading, setLoading] = useState(true);
-	const [error, setError] = useState(false);
+	const { applications, loading, error } = useApplications();
+
 	const [filterSearch, setFilterSearch] = useState("");
 	const [tagFilter, setTagFilter] = useState("all applied interviewing offer rejected");
 
-	//on mount this use effect trys to fewtch applications otherwise returns appropriate erro
-	useEffect(() => {
-		const controller = new AbortController();
-
-        async function loadApplications() {
-            try {
-                const response = await fetch('http://localhost:5173/applications.json', {signal: controller.signal});
-
-                if (!response.ok) {
-                    throw new Error(`HTTP Error: ${response.status}`);
-                }
-                const data = await response.json();
-                setApplications(data);
-
-            } catch (error) {
-				//prevents abort error from treating ui elements like an actual visual error.
-				if(error.name === "AbortError"){
-					return;
-				}
-				setError(true);
-                console.error("Failed to fetch applications:", error);
-            } finally{
-				setLoading(false);
-			}
-        }
-
-		loadApplications();
-		return () => controller.abort();
-    }, []);
 
 	//defining an object before passing the props into Summary Componant 
 	const propsForSummary = {
@@ -61,8 +32,6 @@ export default function App() {
 	
 	return (
 		<>
-
-			<Header />
 
 			<main className="container">
 
