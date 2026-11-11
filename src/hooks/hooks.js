@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
 
-
-
 /**
  * this is a custom hook that fetches the applications data from the JSON file and returns it along with loading and error states.
  * @returns {Object} An object containing the applications data, loading state, and error state.
