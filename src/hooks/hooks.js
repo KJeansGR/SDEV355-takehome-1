@@ -16,6 +16,7 @@ export function useApplications() {
   useEffect(() => {
     const controller = new AbortController();
 
+
     async function loadApplications() {
       try {
         const response = await fetch("../applications.json", {
@@ -41,9 +42,15 @@ export function useApplications() {
       }
     }
 
-    loadApplications();
+    const timer = setTimeout(() => {
+        loadApplications();
+    }, 1000);
 
-    return () => controller.abort();
+
+    return () => {
+        controller.abort();
+        clearTimeout(timer);
+    };
   }, []);
 
   return { applications, loading, error };

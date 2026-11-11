@@ -1,5 +1,5 @@
 import ApplicationCard from "./ApplicationCard";
-
+import { Link } from "react-router-dom";
 /*helper function to sort the applications object by the "Newest" */ 
 function byNewest(a, b) {
   return b.appliedOn.localeCompare(a.appliedOn);
@@ -7,7 +7,7 @@ function byNewest(a, b) {
 
 /*
 This function is the outer container element for all of the application cards .
-iThisjsx element maps a sorted version of the applications array into a larger div element.
+This jsx element maps a sorted version of the applications array into a larger div element.
 */
 function AppsContainer({applications, isLoading, isError, isEmpty, tagFilter, searchFilter, children}){
 
@@ -19,10 +19,23 @@ const sortedApps = [...applications].filter(app => tagFilter.length === 0 || tag
                                     .filter(app => app.company.toLowerCase().includes(search) ||app.role.toLowerCase().includes(search))
                                     .sort(byNewest);
 
-    return(
-    <>
-        <h2>Applications</h2>
 
+//helper function to render the applications cards or a loading or error message based on the state of the data.                                    
+const appsRender = ()=>{
+    if(isLoading){
+        return (<h3 style={{color:"GrayText", textAlign:"center"}}>
+            Loading...
+        </h3>)
+    }
+    if(isError){
+        return(
+            <h3 style={{color:"GrayText", textAlign:"center"}}>
+                Error loading applications.
+            </h3>
+        )
+    }
+    else
+        return(
         <div className= {"job-list"}>
             {sortedApps.length > 0 &&
                 sortedApps.map((app) => 
@@ -36,7 +49,14 @@ const sortedApps = [...applications].filter(app => tagFilter.length === 0 || tag
         
             { children}
         </div>
-        
+
+    )
+
+}
+    return(
+    <>
+        <h2>Applications</h2>
+        {appsRender()}
 
     </>
     )
