@@ -51,15 +51,6 @@ export default function Home() {
                 tagFilter = {tagFilter} 
                 searchFilter={filterSearch} 
                 >
-                    { (applications.length <= 0 && !error) &&
-                        <p className="empty"> Applications are empty</p>
-                    }
-                    {error &&
-                        <p className="error"> Error Loading Applications</p>
-                    }
-                    {loading &&
-                        <p className="loading"> Loading</p>
-                    }
             </AppsContainer>
 
         </main>

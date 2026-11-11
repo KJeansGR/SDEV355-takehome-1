@@ -23,17 +23,20 @@ const sortedApps = [...applications].filter(app => tagFilter.length === 0 || tag
 //helper function to render the applications cards or a loading or error message based on the state of the data.                                    
 const appsRender = ()=>{
     if(isLoading){
-        return (<h3 style={{color:"GrayText", textAlign:"center"}}>
+        return(
+        <h3 className="empty" style={{color:"GrayText", textAlign:"center"}}>
             Loading...
         </h3>)
     }
-    if(isError){
+    else if(isError){
         return(
-            <h3 style={{color:"GrayText", textAlign:"center"}}>
-                Error loading applications.
-            </h3>
-        )
+        <h3 className="empty" style={{color:"crimson", textAlign:"center"}}>
+            Error loading applications.
+        </h3>)
     }
+    else if(applications.length <= 0 && !isError) {
+        return( <p className="empty"> Applications are empty</p> )
+     }
     else
         return(
         <div className= {"job-list"}>
@@ -48,11 +51,8 @@ const appsRender = ()=>{
             }
         
             { children}
-        </div>
-
-    )
-
-}
+        </div>)
+    }
     return(
     <>
         <h2>Applications</h2>

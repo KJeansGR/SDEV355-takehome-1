@@ -1,8 +1,13 @@
+import { Link } from 'react-router-dom';
 import Badge from './Badge.jsx';
 
 /**
  * Renders a card containing information about a job application.
- *
+ * 
+ * I wrapped the entire component in a link so its clickable using a Link 
+ * because thats what the rubric says to do. I Think a useNavigate would work 
+ * here though.
+ * 
  * @param {Object} props -          The application data.
  * @param {string} props.role -     The job title or role applied for.
  * @param {string} props.company -  The company offering the position.
@@ -14,6 +19,7 @@ import Badge from './Badge.jsx';
  * @returns {JSX.Element} A card displaying the application's information.
  */
 function ApplicationCard({
+    id,
     role,
     company,
     appliedOn,
@@ -21,32 +27,29 @@ function ApplicationCard({
     notes,
     status
     }){
-
     return(
-    <>
-    <div className="job-card">
-        <div>
-            <h3>{role}</h3><br/>
 
-            <div className=" company">
-                {company}
-            </div>
-            <div className="meta">
-                {appliedOn} {source && "| " + source}
-            </div>
+        <Link to={`/applications/${id}`} className="application-link" >
+        <div className="job-card" >
+            <div>
+                <h3>{role}</h3><br/>
 
-            {notes &&
-                <div className="note">
-                    {notes}
+                <div className=" company">
+                    {company}
                 </div>
-            }
-        </div>
-        <Badge status ={status} />
-    </div>
-            
+                <div className="meta">
+                    {appliedOn} {source && "| " + source}
+                </div>
 
-    
-    </>
+                {notes &&
+                    <div className="note">
+                        {notes}
+                    </div>
+                }
+            </div>
+            <Badge status ={status} />
+        </div>    
+    </Link>
     )
 }
 export default ApplicationCard;

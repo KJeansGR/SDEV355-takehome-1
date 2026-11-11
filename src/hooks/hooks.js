@@ -44,7 +44,7 @@ export function useApplications() {
 
     const timer = setTimeout(() => {
         loadApplications();
-    }, 1000);
+    }, 500);
 
 
     return () => {
