@@ -2,20 +2,32 @@ import { useParams } from 'react-router-dom';
 import { useApplications } from '../hooks/hooks';
 import Badge from '../components/Badge.jsx';
 import { Link } from 'react-router-dom';
+import NotFound from './NotFound.jsx';
 export default function ApplicationDetail() {
     const {applications, loading, error} = useApplications();
     const {id} = useParams();
+
     const targetApp = [...applications.filter(a => a.id == id)];
+
+    // Wait until applications have loaded
+    if (loading) {
+        return <div>Loading...</div>;
+    }
+
+    // Handle fetch errors
+    if (error) {
+        return <div>Error loading applications</div>;
+    }
+
+    // Handle bad IDs
+    if (targetApp.length == 0) {
+        return <NotFound />;
+    }
 
 	return (
         <>
         <h1>Application Detail</h1>
-        { loading ? 
-            <div className="">Loading</div> :
-            error ? 
-                <div className="">Error</div> : 
-         "" 
-        }
+    
         { !loading &&  
             <div className="job-card" >
                 <div>

@@ -15,6 +15,7 @@ export default function App() {
 					<Route index element={<Home />} />
 					<Route path="applications/:id" element={<ApplicationDetail />} />
 					<Route path="*" element={<NotFound />} />
+					<Route path="applications/*" element={<NotFound />} />
 				</Route>
 			</Routes>
 		</>
