@@ -24,3 +24,13 @@ This portion of the assignment focused on dealing with state manipulation and fi
 - clean and organized UI management
 
 # Job Application Tracker — Take-Home #3
+
+## Summary
+This portion of the assignment focused on dealing with routes and using react router to create a multi-page application.This portion also focused on creating a responsive UI with sorted elements
+
+## What I acomplished
+- iumplementing routes and using browser router
+- handling props in an efficient way.
+- passing information between pages and efficiently
+- implementing a custom hook to gather application data
+- creating good user feedback for routes that dont exist
