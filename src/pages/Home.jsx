@@ -8,7 +8,7 @@ export default function Home() {
 
     const { applications, loading, error } = useApplications();
     const [filterSearch, setFilterSearch] = useState("");
-    const [tagFilter, setTagFilter] = useState("all applied interviewing offer rejected");
+    const [tagFilter, onTagFilterChange] = useState("all applied interviewing offer rejected");
 
     //defining an object before passing the props into Summary Componant 
 	const propsForSummary = {
@@ -26,19 +26,19 @@ export default function Home() {
             
             <div className="filters">
                 <button className= {`chip ${tagFilter.includes("all") ? "active" :""}`}  
-                onClick={()=> setTagFilter("all applied interviewing offer rejected") }>All</button>
+                onClick={()=> onTagFilterChange("all applied interviewing offer rejected") }>All</button>
                 
                 <button className={`chip ${tagFilter == "applied" ? "active" :""}`}
-                onClick={()=>setTagFilter("applied")}>applied</button>
+                onClick={()=>onTagFilterChange("applied")}>applied</button>
                 
                 <button className={`chip ${tagFilter == "interviewing" ? "active" :""}`}
-                onClick={()=>setTagFilter("interviewing")}>interviewing</button>
+                onClick={()=>onTagFilterChange("interviewing")}>interviewing</button>
 
                 <button className={`chip ${tagFilter == "offer" ? "active" :""}`}
-                onClick={()=>setTagFilter("offer")}>offer</button>
+                onClick={()=>onTagFilterChange("offer")}>offer</button>
 
                 <button className={`chip ${tagFilter == "rejected" ? "active" :""}`}
-                onClick={()=>setTagFilter("rejected")}>rejected</button>
+                onClick={()=>onTagFilterChange("rejected")}>rejected</button>
 
                 <input type="search" value={filterSearch} onChange={(e) => setFilterSearch(e.target.value)}/>
             </div>

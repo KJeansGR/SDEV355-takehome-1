@@ -1,7 +1,8 @@
 
 /*Separated header componant that can be shared between pages */
 function Header(){
-    
+
+
     return(
         <>
             <header className="site-header">

@@ -47,8 +47,8 @@ export default function ApplicationDetail() {
                 </div>
 
                 <div style={{ display:"flex", flexDirection:"column", alignItems:"center"}}>
-                <p><Badge status ={targetApp[0].status} /></p>
-                <p><Link className="chip application-link" to={"/"}>back to HomePage</Link></p>
+                <div><Badge status ={targetApp[0].status} /></div>
+                <div><Link className="chip application-link" to={"/"}>back to HomePage</Link></div>
                 </div>
 
             </div>
