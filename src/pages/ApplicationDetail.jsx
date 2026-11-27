@@ -3,6 +3,8 @@ import { useApplications } from '../hooks/hooks';
 import Badge from '../components/Badge.jsx';
 import { Link } from 'react-router-dom';
 import NotFound from './NotFound.jsx';
+
+
 export default function ApplicationDetail() {
     const {applications, loading, error} = useApplications();
     const {id} = useParams();

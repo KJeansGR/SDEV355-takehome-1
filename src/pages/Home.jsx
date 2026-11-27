@@ -24,6 +24,8 @@ export default function Home() {
 
             <Summary {...propsForSummary} />
             
+            <h2>Applications</h2>
+
             <div className="filters">
                 <button className= {`chip ${tagFilter.includes("all") ? "active" :""}`}  
                 onClick={()=> onTagFilterChange("all applied interviewing offer rejected") }>All</button>
@@ -42,7 +44,7 @@ export default function Home() {
 
                 <input type="search" value={filterSearch} onChange={(e) => setFilterSearch(e.target.value)}/>
             </div>
-
+            
             <AppsContainer 
                 applications={applications} 
                 isLoading={loading} 

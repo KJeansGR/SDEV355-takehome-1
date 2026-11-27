@@ -55,7 +55,6 @@ const appsRender = ()=>{
     }
     return(
     <>
-        <h2>Applications</h2>
         {appsRender()}
 
     </>

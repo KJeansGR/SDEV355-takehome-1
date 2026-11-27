@@ -30,26 +30,26 @@ function ApplicationCard({
     return(
 
         <Link to={`/applications/${id}`} className="application-link" >
-        <div className="job-card" >
-            <div>
-                <h3>{role}</h3><br/>
+            <div className="job-card" >
+                <div>
+                    <h3>{role}</h3><br/>
 
-                <div className=" company">
-                    {company}
-                </div>
-                <div className="meta">
-                    {appliedOn} {source && "| " + source}
-                </div>
-
-                {notes &&
-                    <div className="note">
-                        {notes}
+                    <div className=" company">
+                        {company}
                     </div>
-                }
-            </div>
-            <Badge status ={status} />
-        </div>    
-    </Link>
+                    <div className="meta">
+                        {appliedOn} {source && "| " + source}
+                    </div>
+
+                    {notes &&
+                        <div className="note">
+                            {notes}
+                        </div>
+                    }
+                </div>
+                <Badge status ={status} />
+            </div>    
+        </Link>
     )
 }
 export default ApplicationCard;
