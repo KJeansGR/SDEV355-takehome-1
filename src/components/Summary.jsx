@@ -1,3 +1,5 @@
+import { useAppContext } from "../context/ApplicationProvider.jsx";
+import {STATUSES} from '../statuses.js';
 
 /**
  * Renders a Banner style summary of current application statistics for the user.
@@ -10,13 +12,17 @@
  *
  * @returns {JSX.Element} A summary banner displaying application counts by status.
  */
-function Summary({
-    total, 
-    applied,
-    interviewing,
-    offer,
-    rejected
-    }){
+function Summary(){
+
+    const{applications} = useAppContext();
+
+    //summary tickker/tracker values
+    const total = applications.length;
+    const applied = applications.filter(app => app.status == STATUSES[0]).length;
+    const interviewing = applications.filter(app => app.status == STATUSES[1]).length;
+    const offer= applications.filter(app => app.status == STATUSES[2]).length;
+    const rejected= applications.filter(app => app.status == STATUSES[3]).length;
+	
 
     return(
     <div className="summary">

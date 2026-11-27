@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState} from "react";
 
 /**
  * this is a custom hook that fetches the applications data from the JSON file and returns it along with loading and error states.
@@ -15,7 +15,6 @@ export function useApplications() {
 
   useEffect(() => {
     const controller = new AbortController();
-
 
     async function loadApplications() {
       try {

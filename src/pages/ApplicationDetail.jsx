@@ -1,12 +1,13 @@
 import { useParams } from 'react-router-dom';
-import { useApplications } from '../hooks/hooks';
 import Badge from '../components/Badge.jsx';
 import { Link } from 'react-router-dom';
 import NotFound from './NotFound.jsx';
+import { useAppContext } from '../context/ApplicationProvider.jsx';
 
 
 export default function ApplicationDetail() {
-    const {applications, loading, error} = useApplications();
+    const {applications, loading, error} = useAppContext();
+
     const {id} = useParams();
 
     const targetApp = [...applications.filter(a => a.id == id)];

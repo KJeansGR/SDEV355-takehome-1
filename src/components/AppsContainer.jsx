@@ -1,17 +1,24 @@
+import { useAppContext } from "../context/ApplicationProvider";
 import ApplicationCard from "./ApplicationCard";
-import { Link } from "react-router-dom";
+
+
+
+
 /*helper function to sort the applications object by the "Newest" */ 
 function byNewest(a, b) {
   return b.appliedOn.localeCompare(a.appliedOn);
 }
 
+
 /*
 This function is the outer container element for all of the application cards .
 This jsx element maps a sorted version of the applications array into a larger div element.
 */
-function AppsContainer({applications, isLoading, isError, isEmpty, tagFilter, searchFilter, children}){
-
-const search = (searchFilter)?.toLowerCase().trim();   
+function AppsContainer({tagFilter, searchFilter}){
+    
+    const search = (searchFilter)?.toLowerCase().trim();   
+    const {applications, loading: isLoading, error: isError} = useAppContext();
+    const isEmpty=applications.length <= 0;
 
 //Filters a non mutated version of applications for a toggled "chip" 
 //and the search value matched against the applications role and company
@@ -49,8 +56,6 @@ const appsRender = ()=>{
             { (sortedApps.length===0 && !isEmpty) &&
                 <p className="empty">No applications match these filters</p>
             }
-        
-            { children}
         </div>)
     }
     return(
