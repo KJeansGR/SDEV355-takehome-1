@@ -339,7 +339,9 @@ a {
 	background: var(--panel-2);
 	color: var(--ink);
 }
-
+.tArea {
+	grid-column: span 2;
+}
 .field input:focus,
 .field select:focus,
 .field textarea:focus {
