@@ -1,9 +1,9 @@
-import { useEffect } from "react";
+import { useEffect,useState } from "react";
 import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 
 const initialApplication = {
-	company: "",
+	company: "hello",
 	role: "",
 	status: "",
 	appliedOn: "",
@@ -14,18 +14,30 @@ const initialApplication = {
 
 export default function ApplicationForm() {
     const params = useParams();
+    const[formErrors, setFormErrors] = useState({company: true, role: true, dateFormat: true});
+	const {register, handleSubmit, reset} = useForm(initialApplication);
 
-	const {register, handleSubmit, reset} = useForm();
+	function onSubmit(formData){
+        
+        const validateCompany = formData.company !== "";
+        const validateRole = formData.role !== "";
+        const validateDateFormat = formData?.appliedOn.year < new Date().getFullYear();
 
-	const onSubmit = async (formData) => {
-		console.log("Application submitted:", formData);
-		reset();
+        setFormErrors({company: validateCompany, role: validateRole, dateFormat: validateDateFormat});
+
+        if(formErrors != null && Object.keys(formErrors).length === 0){
+            console.log("Application submitted:", formData);
+            reset();
+        }
+        else
+        console.log("Application could not be submitted");
 	};
 
     useEffect(()=>{
         if(params.id){
-        console.log(params.id);
-    }
+            //set form values for the application value       
+            console.log(params.id);
+        }
     }, []);
 	return (
         <div className="container">
@@ -33,11 +45,16 @@ export default function ApplicationForm() {
 
             <form className="form-row" onSubmit={handleSubmit(onSubmit)}>
 
-                <div className="field">
+                <div className={` field ${!formErrors.company ? "invalid" : ""}`}>
                     <label className="form-label" htmlFor="company"> Company </label>
-                    <input id="company" {...register("company")} />
+                    <input 
+                        id="company" 
+                        {...register("company")}
+                    />
+                    {!formErrors.company && <span className="message">company required</span>}
                 </div>
 
+                
                 <div className="field">
                     <label className="form-label" htmlFor="role"> Role </label>
                     <input id="role" {...register("role")} />
@@ -68,6 +85,7 @@ export default function ApplicationForm() {
                     <label className="form-label" htmlFor="notes"> Additional information </label>
                     <textarea id="notes" rows={4} {...register("notes")} />
                 </div>
+
                 <div className="" style={{display: "flex", gap: "2rem"}}>
                     <button className="btn-primary btn" type="submit" > Submit application </button>
                     <button className="btn" type="submit" > cancel </button>

@@ -10,7 +10,7 @@ export function ApplicationProvider({children}){
     
     useEffect(() => {
     if (!loading && !error) {
-        dispatch({ type: "fetch", applications: initialApps, loading: loading, error: error });
+        dispatch({ type: "fetch", applications: initialApps });
     }
     }, [initialApps, loading, error]);
 
@@ -18,6 +18,7 @@ export function ApplicationProvider({children}){
         <appContext.Provider value={{
             loading: loading,
             error: error,
+            dispatch: dispatch,
             applications: state.applications
         }}>
             {children}

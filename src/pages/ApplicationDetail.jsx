@@ -6,7 +6,7 @@ import { useAppContext } from '../context/ApplicationProvider.jsx';
 
 
 export default function ApplicationDetail() {
-    const {applications, loading, error} = useAppContext();
+    const {applications, loading, error, dispatch} = useAppContext();
 
     const {id} = useParams();
 
@@ -16,17 +16,23 @@ export default function ApplicationDetail() {
     if (loading) {
         return <div>Loading...</div>;
     }
-
     // Handle fetch errors
     if (error) {
         return <div>Error loading applications</div>;
     }
-
     // Handle bad IDs
     if (targetApp.length == 0) {
         return <NotFound />;
     }
 
+    function handleDelete(){
+        const isConfirmed = window.confirm("Are you sure you want to delete this Application?");
+        
+        if (isConfirmed) {
+            //reducer call
+            dispatch({ type: "applicationDeleted", id });
+        }
+    };
 	return (
         <>
         <h1>Application Detail</h1>
@@ -59,11 +65,20 @@ export default function ApplicationDetail() {
                         Notes  {targetApp[0].notes}
                         </div>
                     }
+
+                    <div style={{ display:"flex", gap:".5rem"}}>
+                        
+                        <Link to={`/applications/${targetApp[0].id}/edit`}>
+                            <button className="btn-primary btn">Edit</button>
+                        </Link>
+                        <button className="btn btn-danger" onClick={handleDelete}>Delete</button>
+
+                    </div>
                 </div>
 
                 <div style={{ display:"flex", flexDirection:"column", alignItems:"center"}}>
-                <div><Badge status ={targetApp[0].status} /></div>
-                <div><Link className="chip application-link" to={"/"}>back to HomePage</Link></div>
+                    <div><Badge status ={targetApp[0].status} /></div>
+                    <Link className="" to={"/"}><button className='btn btn-primary'>back to HomePage</button></Link>
                 </div>
 
             </div>
